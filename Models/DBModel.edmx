@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SQL_AzureModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CAX_Venda">
+          <Key>
+            <PropertyRef Name="cod_Venda" />
+          </Key>
+          <Property Name="cod_Venda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dta_Venda" Type="datetime" Nullable="false" />
+          <Property Name="cod_Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vlr_Venda" Type="money" />
+          <Property Name="flg_Status" Type="char" MaxLength="1" />
+          <Property Name="cod_Recebimento" Type="int" />
+        </EntityType>
+        <EntityType Name="CAX_VendaProduto">
+          <Key>
+            <PropertyRef Name="cod_VendaProduto" />
+          </Key>
+          <Property Name="cod_VendaProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_Produto" Type="int" />
+          <Property Name="vlr_Produto" Type="money" />
+          <Property Name="qtd_Produto" Type="int" />
+          <Property Name="flg_Ativo" Type="char" MaxLength="1" />
+          <Property Name="cod_Venda" Type="int" />
+        </EntityType>
+        <EntityType Name="COR_Embalagem">
+          <Key>
+            <PropertyRef Name="cod_embalagem" />
+          </Key>
+          <Property Name="cod_embalagem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_embalagem" Type="varchar" MaxLength="250" />
+          <Property Name="des_descricao" Type="varchar" MaxLength="500" />
+          <Property Name="flg_Ativo" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="COR_GrupoProduto">
+          <Key>
+            <PropertyRef Name="cod_GrupoProduto" />
+          </Key>
+          <Property Name="cod_GrupoProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_GrupoProduto" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="des_Descricao" Type="varchar" MaxLength="250" />
+          <Property Name="flg_Ativo" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="COR_Produto">
+          <Key>
+            <PropertyRef Name="cod_Produto" />
+          </Key>
+          <Property Name="cod_Produto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_Produto" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="cod_GrupoProduto" Type="int" />
+          <Property Name="cod_Embalagem" Type="int" />
+          <Property Name="qtd_EstoqueMinimo" Type="int" />
+          <Property Name="cod_EAN" Type="varchar" MaxLength="13" />
+          <Property Name="vlr_Compra" Type="money" />
+          <Property Name="vlr_Venda" Type="money" />
+          <Property Name="des_Descricao" Type="varchar" MaxLength="500" />
+          <Property Name="cod_Fabricante" Type="int" />
+          <Property Name="flg_Ativo" Type="char" MaxLength="1" />
+          <Property Name="dta_Cadastro" Type="datetime" />
+          <Property Name="des_Imagem" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__CAX_Venda__cod_P__5FB337D6">
+          <End Role="COR_Produto" Type="Self.COR_Produto" Multiplicity="0..1" />
+          <End Role="CAX_VendaProduto" Type="Self.CAX_VendaProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COR_Produto">
+              <PropertyRef Name="cod_Produto" />
+            </Principal>
+            <Dependent Role="CAX_VendaProduto">
+              <PropertyRef Name="cod_Produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CAX_Venda__cod_V__60A75C0F">
+          <End Role="CAX_Venda" Type="Self.CAX_Venda" Multiplicity="0..1" />
+          <End Role="CAX_VendaProduto" Type="Self.CAX_VendaProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAX_Venda">
+              <PropertyRef Name="cod_Venda" />
+            </Principal>
+            <Dependent Role="CAX_VendaProduto">
+              <PropertyRef Name="cod_Venda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SQL_AzureModelStoreContainer">
+          <EntitySet Name="CAX_Venda" EntityType="Self.CAX_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAX_VendaProduto" EntityType="Self.CAX_VendaProduto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COR_Embalagem" EntityType="Self.COR_Embalagem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COR_GrupoProduto" EntityType="Self.COR_GrupoProduto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COR_Produto" EntityType="Self.COR_Produto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CAX_Venda__cod_P__5FB337D6" Association="Self.FK__CAX_Venda__cod_P__5FB337D6">
+            <End Role="COR_Produto" EntitySet="COR_Produto" />
+            <End Role="CAX_VendaProduto" EntitySet="CAX_VendaProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CAX_Venda__cod_V__60A75C0F" Association="Self.FK__CAX_Venda__cod_V__60A75C0F">
+            <End Role="CAX_Venda" EntitySet="CAX_Venda" />
+            <End Role="CAX_VendaProduto" EntitySet="CAX_VendaProduto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SQL_AzureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CAX_Venda">
+          <Key>
+            <PropertyRef Name="cod_Venda" />
+          </Key>
+          <Property Name="cod_Venda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dta_Venda" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cod_Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vlr_Venda" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="flg_Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cod_Recebimento" Type="Int32" />
+          <NavigationProperty Name="CAX_VendaProduto" Relationship="Self.FK__CAX_Venda__cod_V__60A75C0F" FromRole="CAX_Venda" ToRole="CAX_VendaProduto" />
+        </EntityType>
+        <EntityType Name="CAX_VendaProduto">
+          <Key>
+            <PropertyRef Name="cod_VendaProduto" />
+          </Key>
+          <Property Name="cod_VendaProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_Produto" Type="Int32" />
+          <Property Name="vlr_Produto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="qtd_Produto" Type="Int32" />
+          <Property Name="flg_Ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cod_Venda" Type="Int32" />
+          <NavigationProperty Name="CAX_Venda" Relationship="Self.FK__CAX_Venda__cod_V__60A75C0F" FromRole="CAX_VendaProduto" ToRole="CAX_Venda" />
+          <NavigationProperty Name="COR_Produto" Relationship="Self.FK__CAX_Venda__cod_P__5FB337D6" FromRole="CAX_VendaProduto" ToRole="COR_Produto" />
+        </EntityType>
+        <EntityType Name="COR_Embalagem">
+          <Key>
+            <PropertyRef Name="cod_embalagem" />
+          </Key>
+          <Property Name="cod_embalagem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_embalagem" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="des_descricao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="flg_Ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="COR_GrupoProduto">
+          <Key>
+            <PropertyRef Name="cod_GrupoProduto" />
+          </Key>
+          <Property Name="cod_GrupoProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_GrupoProduto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="flg_Ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="COR_Produto">
+          <Key>
+            <PropertyRef Name="cod_Produto" />
+          </Key>
+          <Property Name="cod_Produto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_Produto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cod_GrupoProduto" Type="Int32" />
+          <Property Name="cod_Embalagem" Type="Int32" />
+          <Property Name="qtd_EstoqueMinimo" Type="Int32" />
+          <Property Name="cod_EAN" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="vlr_Compra" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="vlr_Venda" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="des_Descricao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cod_Fabricante" Type="Int32" />
+          <Property Name="flg_Ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="dta_Cadastro" Type="DateTime" Precision="3" />
+          <Property Name="des_Imagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CAX_VendaProduto" Relationship="Self.FK__CAX_Venda__cod_P__5FB337D6" FromRole="COR_Produto" ToRole="CAX_VendaProduto" />
+        </EntityType>
+        <Association Name="FK__CAX_Venda__cod_V__60A75C0F">
+          <End Role="CAX_Venda" Type="Self.CAX_Venda" Multiplicity="0..1" />
+          <End Role="CAX_VendaProduto" Type="Self.CAX_VendaProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAX_Venda">
+              <PropertyRef Name="cod_Venda" />
+            </Principal>
+            <Dependent Role="CAX_VendaProduto">
+              <PropertyRef Name="cod_Venda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CAX_Venda__cod_P__5FB337D6">
+          <End Role="COR_Produto" Type="Self.COR_Produto" Multiplicity="0..1" />
+          <End Role="CAX_VendaProduto" Type="Self.CAX_VendaProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COR_Produto">
+              <PropertyRef Name="cod_Produto" />
+            </Principal>
+            <Dependent Role="CAX_VendaProduto">
+              <PropertyRef Name="cod_Produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SQL_AzureEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CAX_Venda" EntityType="Self.CAX_Venda" />
+          <EntitySet Name="CAX_VendaProduto" EntityType="Self.CAX_VendaProduto" />
+          <EntitySet Name="COR_Embalagem" EntityType="Self.COR_Embalagem" />
+          <EntitySet Name="COR_GrupoProduto" EntityType="Self.COR_GrupoProduto" />
+          <EntitySet Name="COR_Produto" EntityType="Self.COR_Produto" />
+          <AssociationSet Name="FK__CAX_Venda__cod_V__60A75C0F" Association="Self.FK__CAX_Venda__cod_V__60A75C0F">
+            <End Role="CAX_Venda" EntitySet="CAX_Venda" />
+            <End Role="CAX_VendaProduto" EntitySet="CAX_VendaProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CAX_Venda__cod_P__5FB337D6" Association="Self.FK__CAX_Venda__cod_P__5FB337D6">
+            <End Role="COR_Produto" EntitySet="COR_Produto" />
+            <End Role="CAX_VendaProduto" EntitySet="CAX_VendaProduto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SQL_AzureModelStoreContainer" CdmEntityContainer="SQL_AzureEntities">
+          <EntitySetMapping Name="CAX_Venda">
+            <EntityTypeMapping TypeName="SQL_AzureModel.CAX_Venda">
+              <MappingFragment StoreEntitySet="CAX_Venda">
+                <ScalarProperty Name="cod_Venda" ColumnName="cod_Venda" />
+                <ScalarProperty Name="dta_Venda" ColumnName="dta_Venda" />
+                <ScalarProperty Name="cod_Login" ColumnName="cod_Login" />
+                <ScalarProperty Name="vlr_Venda" ColumnName="vlr_Venda" />
+                <ScalarProperty Name="flg_Status" ColumnName="flg_Status" />
+                <ScalarProperty Name="cod_Recebimento" ColumnName="cod_Recebimento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAX_VendaProduto">
+            <EntityTypeMapping TypeName="SQL_AzureModel.CAX_VendaProduto">
+              <MappingFragment StoreEntitySet="CAX_VendaProduto">
+                <ScalarProperty Name="cod_VendaProduto" ColumnName="cod_VendaProduto" />
+                <ScalarProperty Name="cod_Produto" ColumnName="cod_Produto" />
+                <ScalarProperty Name="vlr_Produto" ColumnName="vlr_Produto" />
+                <ScalarProperty Name="qtd_Produto" ColumnName="qtd_Produto" />
+                <ScalarProperty Name="flg_Ativo" ColumnName="flg_Ativo" />
+                <ScalarProperty Name="cod_Venda" ColumnName="cod_Venda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COR_Embalagem">
+            <EntityTypeMapping TypeName="SQL_AzureModel.COR_Embalagem">
+              <MappingFragment StoreEntitySet="COR_Embalagem">
+                <ScalarProperty Name="cod_embalagem" ColumnName="cod_embalagem" />
+                <ScalarProperty Name="nom_embalagem" ColumnName="nom_embalagem" />
+                <ScalarProperty Name="des_descricao" ColumnName="des_descricao" />
+                <ScalarProperty Name="flg_Ativo" ColumnName="flg_Ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COR_GrupoProduto">
+            <EntityTypeMapping TypeName="SQL_AzureModel.COR_GrupoProduto">
+              <MappingFragment StoreEntitySet="COR_GrupoProduto">
+                <ScalarProperty Name="cod_GrupoProduto" ColumnName="cod_GrupoProduto" />
+                <ScalarProperty Name="nom_GrupoProduto" ColumnName="nom_GrupoProduto" />
+                <ScalarProperty Name="des_Descricao" ColumnName="des_Descricao" />
+                <ScalarProperty Name="flg_Ativo" ColumnName="flg_Ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COR_Produto">
+            <EntityTypeMapping TypeName="SQL_AzureModel.COR_Produto">
+              <MappingFragment StoreEntitySet="COR_Produto">
+                <ScalarProperty Name="cod_Produto" ColumnName="cod_Produto" />
+                <ScalarProperty Name="nom_Produto" ColumnName="nom_Produto" />
+                <ScalarProperty Name="cod_GrupoProduto" ColumnName="cod_GrupoProduto" />
+                <ScalarProperty Name="cod_Embalagem" ColumnName="cod_Embalagem" />
+                <ScalarProperty Name="qtd_EstoqueMinimo" ColumnName="qtd_EstoqueMinimo" />
+                <ScalarProperty Name="cod_EAN" ColumnName="cod_EAN" />
+                <ScalarProperty Name="vlr_Compra" ColumnName="vlr_Compra" />
+                <ScalarProperty Name="vlr_Venda" ColumnName="vlr_Venda" />
+                <ScalarProperty Name="des_Descricao" ColumnName="des_Descricao" />
+                <ScalarProperty Name="cod_Fabricante" ColumnName="cod_Fabricante" />
+                <ScalarProperty Name="flg_Ativo" ColumnName="flg_Ativo" />
+                <ScalarProperty Name="dta_Cadastro" ColumnName="dta_Cadastro" />
+                <ScalarProperty Name="des_Imagem" ColumnName="des_Imagem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

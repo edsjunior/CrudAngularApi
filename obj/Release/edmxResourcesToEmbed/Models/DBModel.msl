@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SQL_AzureModelStoreContainer" CdmEntityContainer="SQL_AzureEntities">
+    <EntitySetMapping Name="CAX_Venda">
+      <EntityTypeMapping TypeName="SQL_AzureModel.CAX_Venda">
+        <MappingFragment StoreEntitySet="CAX_Venda">
+          <ScalarProperty Name="cod_Venda" ColumnName="cod_Venda" />
+          <ScalarProperty Name="dta_Venda" ColumnName="dta_Venda" />
+          <ScalarProperty Name="cod_Login" ColumnName="cod_Login" />
+          <ScalarProperty Name="vlr_Venda" ColumnName="vlr_Venda" />
+          <ScalarProperty Name="flg_Status" ColumnName="flg_Status" />
+          <ScalarProperty Name="cod_Recebimento" ColumnName="cod_Recebimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAX_VendaProduto">
+      <EntityTypeMapping TypeName="SQL_AzureModel.CAX_VendaProduto">
+        <MappingFragment StoreEntitySet="CAX_VendaProduto">
+          <ScalarProperty Name="cod_VendaProduto" ColumnName="cod_VendaProduto" />
+          <ScalarProperty Name="cod_Produto" ColumnName="cod_Produto" />
+          <ScalarProperty Name="vlr_Produto" ColumnName="vlr_Produto" />
+          <ScalarProperty Name="qtd_Produto" ColumnName="qtd_Produto" />
+          <ScalarProperty Name="flg_Ativo" ColumnName="flg_Ativo" />
+          <ScalarProperty Name="cod_Venda" ColumnName="cod_Venda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COR_Embalagem">
+      <EntityTypeMapping TypeName="SQL_AzureModel.COR_Embalagem">
+        <MappingFragment StoreEntitySet="COR_Embalagem">
+          <ScalarProperty Name="cod_embalagem" ColumnName="cod_embalagem" />
+          <ScalarProperty Name="nom_embalagem" ColumnName="nom_embalagem" />
+          <ScalarProperty Name="des_descricao" ColumnName="des_descricao" />
+          <ScalarProperty Name="flg_Ativo" ColumnName="flg_Ativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COR_GrupoProduto">
+      <EntityTypeMapping TypeName="SQL_AzureModel.COR_GrupoProduto">
+        <MappingFragment StoreEntitySet="COR_GrupoProduto">
+          <ScalarProperty Name="cod_GrupoProduto" ColumnName="cod_GrupoProduto" />
+          <ScalarProperty Name="nom_GrupoProduto" ColumnName="nom_GrupoProduto" />
+          <ScalarProperty Name="des_Descricao" ColumnName="des_Descricao" />
+          <ScalarProperty Name="flg_Ativo" ColumnName="flg_Ativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COR_Produto">
+      <EntityTypeMapping TypeName="SQL_AzureModel.COR_Produto">
+        <MappingFragment StoreEntitySet="COR_Produto">
+          <ScalarProperty Name="cod_Produto" ColumnName="cod_Produto" />
+          <ScalarProperty Name="nom_Produto" ColumnName="nom_Produto" />
+          <ScalarProperty Name="cod_GrupoProduto" ColumnName="cod_GrupoProduto" />
+          <ScalarProperty Name="cod_Embalagem" ColumnName="cod_Embalagem" />
+          <ScalarProperty Name="qtd_EstoqueMinimo" ColumnName="qtd_EstoqueMinimo" />
+          <ScalarProperty Name="cod_EAN" ColumnName="cod_EAN" />
+          <ScalarProperty Name="vlr_Compra" ColumnName="vlr_Compra" />
+          <ScalarProperty Name="vlr_Venda" ColumnName="vlr_Venda" />
+          <ScalarProperty Name="des_Descricao" ColumnName="des_Descricao" />
+          <ScalarProperty Name="cod_Fabricante" ColumnName="cod_Fabricante" />
+          <ScalarProperty Name="flg_Ativo" ColumnName="flg_Ativo" />
+          <ScalarProperty Name="dta_Cadastro" ColumnName="dta_Cadastro" />
+          <ScalarProperty Name="des_Imagem" ColumnName="des_Imagem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

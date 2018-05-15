@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SQL_AzureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CAX_Venda">
+    <Key>
+      <PropertyRef Name="cod_Venda" />
+    </Key>
+    <Property Name="cod_Venda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dta_Venda" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cod_Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vlr_Venda" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="flg_Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="cod_Recebimento" Type="Int32" />
+    <NavigationProperty Name="CAX_VendaProduto" Relationship="Self.FK__CAX_Venda__cod_V__60A75C0F" FromRole="CAX_Venda" ToRole="CAX_VendaProduto" />
+  </EntityType>
+  <EntityType Name="CAX_VendaProduto">
+    <Key>
+      <PropertyRef Name="cod_VendaProduto" />
+    </Key>
+    <Property Name="cod_VendaProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cod_Produto" Type="Int32" />
+    <Property Name="vlr_Produto" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="qtd_Produto" Type="Int32" />
+    <Property Name="flg_Ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="cod_Venda" Type="Int32" />
+    <NavigationProperty Name="CAX_Venda" Relationship="Self.FK__CAX_Venda__cod_V__60A75C0F" FromRole="CAX_VendaProduto" ToRole="CAX_Venda" />
+    <NavigationProperty Name="COR_Produto" Relationship="Self.FK__CAX_Venda__cod_P__5FB337D6" FromRole="CAX_VendaProduto" ToRole="COR_Produto" />
+  </EntityType>
+  <EntityType Name="COR_Embalagem">
+    <Key>
+      <PropertyRef Name="cod_embalagem" />
+    </Key>
+    <Property Name="cod_embalagem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_embalagem" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="des_descricao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="flg_Ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="COR_GrupoProduto">
+    <Key>
+      <PropertyRef Name="cod_GrupoProduto" />
+    </Key>
+    <Property Name="cod_GrupoProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_GrupoProduto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="des_Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="flg_Ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="COR_Produto">
+    <Key>
+      <PropertyRef Name="cod_Produto" />
+    </Key>
+    <Property Name="cod_Produto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_Produto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cod_GrupoProduto" Type="Int32" />
+    <Property Name="cod_Embalagem" Type="Int32" />
+    <Property Name="qtd_EstoqueMinimo" Type="Int32" />
+    <Property Name="cod_EAN" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="vlr_Compra" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="vlr_Venda" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="des_Descricao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="cod_Fabricante" Type="Int32" />
+    <Property Name="flg_Ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="dta_Cadastro" Type="DateTime" Precision="3" />
+    <Property Name="des_Imagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CAX_VendaProduto" Relationship="Self.FK__CAX_Venda__cod_P__5FB337D6" FromRole="COR_Produto" ToRole="CAX_VendaProduto" />
+  </EntityType>
+  <Association Name="FK__CAX_Venda__cod_V__60A75C0F">
+    <End Role="CAX_Venda" Type="Self.CAX_Venda" Multiplicity="0..1" />
+    <End Role="CAX_VendaProduto" Type="Self.CAX_VendaProduto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAX_Venda">
+        <PropertyRef Name="cod_Venda" />
+      </Principal>
+      <Dependent Role="CAX_VendaProduto">
+        <PropertyRef Name="cod_Venda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CAX_Venda__cod_P__5FB337D6">
+    <End Role="COR_Produto" Type="Self.COR_Produto" Multiplicity="0..1" />
+    <End Role="CAX_VendaProduto" Type="Self.CAX_VendaProduto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COR_Produto">
+        <PropertyRef Name="cod_Produto" />
+      </Principal>
+      <Dependent Role="CAX_VendaProduto">
+        <PropertyRef Name="cod_Produto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SQL_AzureEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CAX_Venda" EntityType="Self.CAX_Venda" />
+    <EntitySet Name="CAX_VendaProduto" EntityType="Self.CAX_VendaProduto" />
+    <EntitySet Name="COR_Embalagem" EntityType="Self.COR_Embalagem" />
+    <EntitySet Name="COR_GrupoProduto" EntityType="Self.COR_GrupoProduto" />
+    <EntitySet Name="COR_Produto" EntityType="Self.COR_Produto" />
+    <AssociationSet Name="FK__CAX_Venda__cod_V__60A75C0F" Association="Self.FK__CAX_Venda__cod_V__60A75C0F">
+      <End Role="CAX_Venda" EntitySet="CAX_Venda" />
+      <End Role="CAX_VendaProduto" EntitySet="CAX_VendaProduto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CAX_Venda__cod_P__5FB337D6" Association="Self.FK__CAX_Venda__cod_P__5FB337D6">
+      <End Role="COR_Produto" EntitySet="COR_Produto" />
+      <End Role="CAX_VendaProduto" EntitySet="CAX_VendaProduto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
